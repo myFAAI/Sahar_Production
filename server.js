@@ -57,7 +57,7 @@ if (NODE_ENV === 'production') {
     }
   });
 } else {
-  // Production: root route serves index.html
+  // Development: root route serves index.html
   app.get('/', (req, res) => {
     res.sendFile(path.join(__dirname, 'public/index.html'));
   });
