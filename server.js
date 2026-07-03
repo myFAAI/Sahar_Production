@@ -16,7 +16,7 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 const app = express();
-const PORT = process.env.PORT || 5000;
+const PORTS = [...new Set([process.env.PORT || 5000, 8080].map((port) => Number(port)))];
 const NODE_ENV = process.env.NODE_ENV || 'production';
 
 // Middleware
@@ -74,8 +74,9 @@ app.use((err, req, res, next) => {
   res.status(500).json({ error: 'Internal Server Error', message: err.message });
 });
 
-// Bind to 0.0.0.0 so Railway can detect and expose the port correctly
-app.listen(PORT, '0.0.0.0', () => {
-  console.log(`🚀 Server running on http://0.0.0.0:${PORT}`);
-  console.log(`📝 Environment: ${NODE_ENV}`);
-});
+for (const port of PORTS) {
+  app.listen(port, '0.0.0.0', () => {
+    console.log(`🚀 Server running on http://0.0.0.0:${port}`);
+    console.log(`📝 Environment: ${NODE_ENV}`);
+  });
+}
