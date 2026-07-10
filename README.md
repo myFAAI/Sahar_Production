@@ -114,6 +114,11 @@ SA_AI/
 - Node.js 16+ and npm
 - MongoDB (local or Atlas)
 
+### Railway Deployment
+- Add your MongoDB connection string in Railway as `MONGODB_URI`.
+- The app also accepts `MONGODB_URL`, `MONGO_URL`, or `DATABASE_URL` if your Railway database plugin exposes a different name.
+- If no database URI is set, the server falls back to `mongodb://localhost:27017/sa_ai` for local development.
+
 ### Installation
 
 1. **Install dependencies**
